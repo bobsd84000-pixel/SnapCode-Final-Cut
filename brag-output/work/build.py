@@ -2,7 +2,7 @@ import base64,re,os
 os.chdir(os.path.dirname(os.path.abspath(__file__))+"/..")
 d="work/chat-images/"
 b=lambda p:"data:image/jpeg;base64,"+base64.b64encode(open(d+p,"rb").read()).decode()
-h=open("work/tpl.html").read().replace("__BR__",b("bracelet.jpg")).replace("__BG__",b("bague.jpg")).replace("__DRAPS__",b("main-draps.jpg")).replace("__HENNE__",b("henne.jpg")).replace("__ORANGE__",b("bague-orange.jpg")).replace("__KAFTAN__",b("kaftan.jpg")).replace("__TATOO__",b("tatouage.jpg"))
+h=open("work/tpl.html").read().replace("__BR__",b("bracelet.jpg")).replace("__BG__",b("bague.jpg")).replace("__DRAPS__",b("main-draps.jpg")).replace("__HENNE__",b("henne.jpg")).replace("__ORANGE__",b("bague-orange.jpg")).replace("__KAFTAN__",b("kaftan.jpg")).replace("__PERLE__",b("perle.jpg")).replace("__COEUR__",b("coeur.jpg")).replace("__COURONNE__",b("couronne.jpg")).replace("__ONGLES__",b("ongles.jpg"))
 open("bijoux-video.html","w").write(h)
 h=re.sub(r'<!DOCTYPE html>\s*<html[^>]*><head>','',h)
 h=h.replace('<meta charset="utf-8">\n','').replace('<meta name="viewport" content="width=device-width, initial-scale=1">\n','').replace('</head><body>','').replace('</body></html>','')
