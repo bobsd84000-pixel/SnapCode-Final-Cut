@@ -43,24 +43,40 @@ html,body{height:100%;background:#000;overflow:hidden}
 #d1,#d2{position:absolute;top:110px;overflow:hidden;border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 0 2px rgba(222,170,60,.45)}
 #d1{left:340px;width:640px;height:485px}#d1 img{width:640px;position:absolute;top:-6px;left:0}
 #d2{left:1020px;width:560px;height:485px}#d2 img{width:642px;position:absolute;left:-30px;top:-10px}
-#cta{position:absolute;left:0;right:0;top:640px;text-align:center}
+#cta{position:absolute;left:0;right:0;top:620px;text-align:center}
 #cta h2{font:400 76px "Young Serif",Georgia,serif}
 #cta p{font-size:40px;color:var(--encre2);margin-top:20px}
 #cta .btn{display:inline-block;margin-top:30px;padding:22px 64px;border-radius:999px;background:var(--or);color:#1a1322;font-size:38px;font-weight:500}
+
+#teaser{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:70px;opacity:0;transition:opacity .9s}
+#teaser.on{opacity:1}
+#teaser .rang{display:flex;gap:60px}
+#teaser .carte{width:380px;height:380px;border-radius:18px;background:#221a2c;box-shadow:0 0 0 2px rgba(222,170,60,.35);overflow:hidden;position:relative}
+#teaser .carte i{position:absolute;inset:0;filter:blur(22px);transform:scale(.9);transition:transform 2.6s ease-out}
+#teaser.on .carte i{transform:scale(1.05)}
+#teaser .c1 i{background:radial-gradient(circle at 50% 50%,transparent 0 70px,#d9d9e0 72px 96px,transparent 98px)}
+#teaser .c2 i{background:radial-gradient(ellipse at 50% 44%,transparent 0 92px,#deaa3c 94px 106px,transparent 108px),radial-gradient(circle at 50% 74%,#f3d27a 0 26px,transparent 28px)}
+#teaser .c3 i{background:radial-gradient(circle at 38% 50%,#f4efe6 0 40px,transparent 42px),radial-gradient(circle at 62% 50%,#f4efe6 0 40px,transparent 42px)}
+#teaser h2{font:400 84px "Young Serif",Georgia,serif}
+#cta small{display:block;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:14px}
+#son{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:16px;z-index:10;font:500 15px "IBM Plex Sans",system-ui,sans-serif;color:#f6f1e8;background:rgba(20,16,28,.75);border:1px solid rgba(222,170,60,.6);border-radius:999px;padding:10px 18px;cursor:pointer}
+#son:focus-visible{outline:2px solid #deaa3c;outline-offset:3px}
 #barre{position:absolute;left:0;bottom:0;height:6px;background:var(--or);width:0}
 </style></head><body>
 <div id="ecran"><div id="scene">
- <div class="titre" id="t1"><h1>Shop Bijoux</h1><div class="trait"></div><p>Argent &amp; Rubis · Idées cadeaux</p></div>
+ <div class="titre" id="t1"><h1>Shop Bijoux</h1><div class="trait"></div><p>Argent &amp; Rubis · Idées cadeaux pour Noël</p></div>
  <div class="photo" id="ph1"><div class="in"><img src="__BR__" alt="Bracelet"></div></div>
  <div class="leg" id="l1"><small>Empire romain · Argent ciselé</small><h2>Bracelet<br>Empire romain</h2><p>Une manchette aux motifs floraux gravés.</p><div class="prix">89 €</div></div>
  <div class="photo" id="ph2"><div class="in"><img src="__BG__" alt="Bague"></div></div>
  <div class="leg" id="l2"><small>Rubis &amp; diamants</small><h2>Bague<br>Ruby</h2><p>Un rubis ovale entouré de diamants.</p><div class="prix">69 €</div></div>
+ <div id="teaser"><h2>Et bien d'autres pièces…</h2><div class="rang"><div class="carte c1"><i></i></div><div class="carte c2"><i></i></div><div class="carte c3"><i></i></div></div></div>
  <div id="duo"><div id="d1"><img src="__BR__" alt=""></div><div id="d2"><img src="__BG__" alt=""></div>
-  <div id="cta"><h2>Shop Bijoux</h2><p>Livraison offerte · Écrin cadeau inclus</p><span class="btn">shopbijoux.fr</span><div class="plus">Et bien d'autres pièces sur le site</div></div></div>
+  <div id="cta"><small>Idée cadeau de Noël</small><h2>Shop Bijoux</h2><p>Livraison offerte · Écrin cadeau inclus</p><span class="btn">shopbijoux.fr</span></div></div>
  <div id="barre"></div>
 </div></div>
+<button id="son" type="button" aria-pressed="false">Activer le son</button>
 <script>
-var D=22000,sc=document.getElementById("scene"),$=function(i){return document.getElementById(i)};
+var D=24500,sc=document.getElementById("scene"),$=function(i){return document.getElementById(i)};
 var K=1;function fit(){K=Math.min(innerWidth/1920,innerHeight/1080);sc.style.transform="translate(-50%,-50%) scale("+K+")"}
 addEventListener("resize",fit);fit();
 function on(i){$(i).classList.add("on")}function off(i){$(i).classList.remove("on")}
@@ -73,7 +89,9 @@ var et=[
  [10400,function(){on("ph2");on("l2");$("ph2").classList.add("zoom")}],
  [13300,function(){$("ph2").classList.add("detail")}],
  [16000,function(){off("ph2");off("l2")}],
- [16800,function(){on("duo")}]
+ [16700,function(){on("teaser")}],
+ [19300,function(){off("teaser")}],
+ [19900,function(){on("duo")}]
 ];
 var t0,f;
 function loop(){var t=performance.now()-t0;
@@ -81,8 +99,33 @@ function loop(){var t=performance.now()-t0;
  $("barre").style.width=Math.min(t/D,1)*100+"%";
  if(t>=D){restart();return}
  requestAnimationFrame(loop)}
-function restart(){["t1","ph1","l1","ph2","l2","duo"].forEach(off);["ph1","ph2"].forEach(function(i){$(i).classList.remove("zoom","detail")});
+function restart(){["t1","ph1","l1","ph2","l2","teaser","duo"].forEach(off);["ph1","ph2"].forEach(function(i){$(i).classList.remove("zoom","detail")});
  setTimeout(function(){t0=performance.now();f=0;requestAnimationFrame(loop)},900)}
 function start(){t0=performance.now();f=0;requestAnimationFrame(loop)}
+
+var ac=null,master=null;
+function note(f,t,d,v){var o=ac.createOscillator(),o2=ac.createOscillator(),g=ac.createGain();
+ o.type="triangle";o2.type="sine";o.frequency.value=f;o2.frequency.value=f*2;
+ g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v,t+.02);g.gain.exponentialRampToValueAtTime(.0001,t+d);
+ o.connect(g);o2.connect(g);g.connect(master);o.start(t);o2.start(t);o.stop(t+d+.1);o2.stop(t+d+.1)}
+var hz=function(m){return 440*Math.pow(2,(m-69)/12)};
+var accords=[[57,60,64,69],[53,57,60,65],[48,52,55,60],[55,59,62,67]];
+var pas=0,prochain=0;
+function planifier(){while(prochain<ac.currentTime+1.2){var a=accords[Math.floor(pas/8)%4],i=pas%8;
+ if(i===0){note(hz(a[0]-12),prochain,3.2,.16)}
+ var seq=[0,1,2,3,2,1,2,3];note(hz(a[seq[i]]+12),prochain,1.8,.07);
+ pas++;prochain+=.42}}
+function reverb(){var n=ac.sampleRate*2.6,b=ac.createBuffer(2,n,ac.sampleRate);
+ for(var c=0;c<2;c++){var d=b.getChannelData(c);for(var k=0;k<n;k++)d[k]=(Math.random()*2-1)*Math.pow(1-k/n,3)}
+ var cv=ac.createConvolver();cv.buffer=b;return cv}
+var timer=null;
+$("son").addEventListener("click",function(){
+ if(!ac){ac=new (window.AudioContext||window.webkitAudioContext)();master=ac.createGain();master.gain.value=.8;
+  var rv=reverb(),wet=ac.createGain();wet.gain.value=.45;master.connect(ac.destination);master.connect(rv);rv.connect(wet);wet.connect(ac.destination);
+  prochain=ac.currentTime+.1}
+ var actif=this.getAttribute("aria-pressed")==="true";
+ if(actif){ac.suspend();clearInterval(timer);this.setAttribute("aria-pressed","false");this.textContent="Activer le son"}
+ else{ac.resume();if(prochain<ac.currentTime)prochain=ac.currentTime+.1;planifier();timer=setInterval(planifier,300);this.setAttribute("aria-pressed","true");this.textContent="Couper le son"}
+});
 if(document.fonts&&document.fonts.ready){document.fonts.ready.then(start)}else{start()}
 </script></body></html>
