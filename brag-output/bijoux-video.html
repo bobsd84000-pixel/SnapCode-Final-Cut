@@ -11,42 +11,42 @@ html,body{height:100%;background:#000;overflow:hidden}
 #scene{position:absolute;left:50%;top:50%;width:1920px;height:1080px;background:radial-gradient(ellipse at 50% 40%,#2a2036 0%,var(--fond) 70%);color:var(--encre);font-family:"IBM Plex Sans",system-ui,sans-serif;overflow:hidden;transform-origin:center;flex:none}
 .titre{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;opacity:0;transition:opacity .9s;pointer-events:none;padding:0 160px}
 .titre.on{opacity:1}
-.titre h1{font:400 150px/1.05 "Young Serif",Georgia,serif}
-.titre p{font-size:46px;color:var(--encre2);margin-top:34px;line-height:1.3}
+.titre h1{font:400 180px/1.05 "Young Serif",Georgia,serif}
+.titre p{font-size:58px;color:var(--encre2);margin-top:34px;line-height:1.3}
 .trait{width:0;height:5px;background:var(--or);margin-top:40px;transition:width 1.2s ease-out .4s}
 .on .trait{width:380px}
 .photo{position:absolute;top:50%;overflow:hidden;border-radius:18px;box-shadow:0 40px 120px rgba(0,0,0,.75),0 0 0 2px rgba(222,170,60,.45);opacity:0;transition:opacity 1s,transform 1.4s cubic-bezier(.2,.8,.2,1)}
 .photo.on{opacity:1}
 .photo .in{position:absolute;left:0;top:0;transform-origin:center;transition:transform 7s linear}
 .photo img{position:absolute;display:block;max-width:none}
-#ph1{left:90px;width:1100px;height:834px;margin-top:-417px;transform:translateX(-80px)}
+#ph1{left:90px;width:960px;height:728px;margin-top:-364px;transform:translateX(-80px)}
 #ph1.on{transform:none}
-#ph1 .in{width:1100px;height:834px}
-#ph1 img{width:1100px;left:0;top:-11px}
-#ph2{left:110px;width:800px;height:800px;margin-top:-400px;transform:translateX(-80px)}
+#ph1 .in{width:960px;height:728px}
+#ph1 img{width:960px;left:0;top:-10px}
+#ph2{left:110px;width:760px;height:760px;margin-top:-380px;transform:translateX(-80px)}
 #ph2.on{transform:none}
-#ph2 .in{width:800px;height:800px}
-#ph2 img{width:904px;left:-42px;top:-15px}
+#ph2 .in{width:760px;height:760px}
+#ph2 img{width:859px;left:-40px;top:-14px}
 .zoom .in{transform:scale(1.1)}
 #ph1.detail .in{transform-origin:30% 58%;transform:scale(1.7);transition:transform 2.4s cubic-bezier(.4,0,.2,1)}
 #ph2.detail .in{transform-origin:50% 45%;transform:scale(1.9);transition:transform 2.4s cubic-bezier(.4,0,.2,1)}
-.prix{margin-top:34px;font:400 64px "Young Serif",Georgia,serif;color:var(--or)}
+.prix{margin-top:34px;font:400 84px "Young Serif",Georgia,serif;color:var(--or)}
 .plus{margin-top:26px;font-size:30px;color:var(--encre2);font-style:italic}
-.leg{position:absolute;right:90px;width:560px;top:50%;transform:translateY(-50%) translateX(60px);opacity:0;transition:opacity .9s,transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.leg{position:absolute;right:80px;width:720px;top:50%;transform:translateY(-50%) translateX(60px);opacity:0;transition:opacity .9s,transform 1.2s cubic-bezier(.2,.8,.2,1)}
 .leg.on{opacity:1;transform:translateY(-50%)}
-.leg small{display:block;font-size:26px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--or);margin-bottom:26px}
-.leg h2{font:400 84px/1.05 "Young Serif",Georgia,serif}
-.leg p{font-size:40px;color:var(--encre2);margin-top:28px;line-height:1.3}
+.leg small{display:block;font-size:32px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;color:var(--or);margin-bottom:26px}
+.leg h2{font:400 108px/1.05 "Young Serif",Georgia,serif}
+.leg p{font-size:50px;color:var(--encre2);margin-top:28px;line-height:1.3}
 #ph3a,#ph3b{width:520px;height:520px;margin-top:-300px}
 #duo{position:absolute;inset:0;opacity:0;transition:opacity 1s}
 #duo.on{opacity:1}
-#d1,#d2{position:absolute;top:110px;overflow:hidden;border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 0 2px rgba(222,170,60,.45)}
+#d1,#d2{position:absolute;top:70px;overflow:hidden;border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 0 2px rgba(222,170,60,.45)}
 #d1{left:340px;width:640px;height:485px}#d1 img{width:640px;position:absolute;top:-6px;left:0}
 #d2{left:1020px;width:560px;height:485px}#d2 img{width:642px;position:absolute;left:-30px;top:-10px}
-#cta{position:absolute;left:0;right:0;top:620px;text-align:center}
-#cta h2{font:400 76px "Young Serif",Georgia,serif}
-#cta p{font-size:40px;color:var(--encre2);margin-top:20px}
-#cta .btn{display:inline-block;margin-top:30px;padding:22px 64px;border-radius:999px;background:var(--or);color:#1a1322;font-size:38px;font-weight:500}
+#cta{position:absolute;left:0;right:0;top:580px;text-align:center}
+#cta h2{font:400 100px "Young Serif",Georgia,serif}
+#cta p{font-size:52px;color:var(--encre2);margin-top:20px}
+#cta .btn{display:inline-block;margin-top:30px;padding:22px 64px;border-radius:999px;background:var(--or);color:#1a1322;font-size:48px;font-weight:500}
 
 #teaser{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:70px;opacity:0;transition:opacity .9s}
 #teaser.on{opacity:1}
@@ -57,9 +57,9 @@ html,body{height:100%;background:#000;overflow:hidden}
 #teaser .c1 i{background:radial-gradient(circle at 50% 50%,transparent 0 70px,#d9d9e0 72px 96px,transparent 98px)}
 #teaser .c2 i{background:radial-gradient(ellipse at 50% 44%,transparent 0 92px,#deaa3c 94px 106px,transparent 108px),radial-gradient(circle at 50% 74%,#f3d27a 0 26px,transparent 28px)}
 #teaser .c3 i{background:radial-gradient(circle at 38% 50%,#f4efe6 0 40px,transparent 42px),radial-gradient(circle at 62% 50%,#f4efe6 0 40px,transparent 42px)}
-#teaser h2{font:400 84px "Young Serif",Georgia,serif}
-#cta small{display:block;font-size:26px;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:14px}
-#son{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:16px;z-index:10;font:500 15px "IBM Plex Sans",system-ui,sans-serif;color:#f6f1e8;background:rgba(20,16,28,.75);border:1px solid rgba(222,170,60,.6);border-radius:999px;padding:10px 18px;cursor:pointer}
+#teaser h2{font:400 108px "Young Serif",Georgia,serif}
+#cta small{display:block;font-size:34px;letter-spacing:.16em;text-transform:uppercase;color:var(--or);margin-bottom:14px}
+#son{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:16px;z-index:10;font:500 17px "IBM Plex Sans",system-ui,sans-serif;color:#f6f1e8;background:rgba(20,16,28,.75);border:1px solid rgba(222,170,60,.6);border-radius:999px;padding:10px 18px;cursor:pointer}
 #son:focus-visible{outline:2px solid #deaa3c;outline-offset:3px}
 #barre{position:absolute;left:0;bottom:0;height:6px;background:var(--or);width:0}
 </style></head><body>
