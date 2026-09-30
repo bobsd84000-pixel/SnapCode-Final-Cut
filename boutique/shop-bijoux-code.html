@@ -1,0 +1,265 @@
+<title>Shop Bijoux</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Écrin sombre : une vitrine de nuit, l'or réservé aux prix et aux actions */
+:root{
+  color-scheme:dark;
+  --fond:#14101c;--surface:#1e1828;--ligne:#3a3046;
+  --encre:#f6f1e8;--encre2:#b9b0c4;--or:#deaa3c;--or-fonce:#1a1322;
+  --titre:"Young Serif",Georgia,serif;--texte:"IBM Plex Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fond);color:var(--encre);font:400 16px/1.6 var(--texte)}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+.conteneur{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,32px)}
+h1,h2,h3{font-family:var(--titre);font-weight:400;text-wrap:balance;margin:0}
+.etiquette{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--or)}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(20,16,28,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--ligne)}
+header .conteneur{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+.logo{font:400 24px var(--titre);text-decoration:none}
+nav{display:flex;gap:24px;align-items:center}
+nav a{text-decoration:none;color:var(--encre2);font-size:15px}
+nav a:hover{color:var(--encre)}
+.btn-panier{display:flex;align-items:center;gap:8px;background:none;border:1px solid var(--or);border-radius:999px;padding:8px 16px;font-size:15px}
+.compteur{background:var(--or);color:var(--or-fonce);border-radius:999px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:13px;font-weight:600;padding:0 6px}
+
+.hero{padding-block:clamp(48px,9vw,110px) clamp(40px,6vw,72px);display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,5vw,64px);align-items:center}
+.hero h1{font-size:clamp(44px,7vw,84px);line-height:1.02;margin-top:14px}
+.hero p{color:var(--encre2);font-size:clamp(17px,2vw,20px);max-width:44ch;margin:20px 0 32px}
+.hero .visuel{position:relative;aspect-ratio:4/5;max-width:100%}
+.hero .visuel img{position:absolute;border-radius:16px;object-fit:cover;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(222,170,60,.35)}
+.hero .v1{inset:0 18% 22% 0;width:82%;height:78%}
+.hero .v2{right:0;bottom:0;width:52%;height:48%}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--or);color:var(--or-fonce);border:0;border-radius:999px;padding:14px 28px;font-weight:600;font-size:16px;text-decoration:none}
+.cta:hover{filter:brightness(1.08)}
+
+.avantages{border-block:1px solid var(--ligne)}
+.avantages .conteneur{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 48px;padding-block:18px;color:var(--encre2);font-size:15px}
+.avantages b{color:var(--encre);font-weight:500}
+
+section{padding-block:clamp(56px,8vw,96px)}
+.entete{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:12px;margin-bottom:32px}
+.entete h2{font-size:clamp(32px,4.5vw,48px);margin-top:8px}
+.entete p{color:var(--encre2);margin:0;max-width:46ch}
+
+.produits{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:28px}
+.produit{background:var(--surface);border:1px solid var(--ligne);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.produit .photo{aspect-ratio:4/3;overflow:hidden;background:#000}
+.produit .photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.produit:hover .photo img{transform:scale(1.05)}
+.produit .infos{padding:22px 24px 24px;display:flex;flex-direction:column;gap:10px;flex:1}
+.produit h3{font-size:28px}
+.produit p{color:var(--encre2);margin:0}
+.produit .bas{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto;padding-top:12px}
+.prix{font:400 30px var(--titre);color:var(--or);font-variant-numeric:tabular-nums}
+.ajouter{background:none;border:1px solid var(--or);color:var(--encre);border-radius:999px;padding:10px 20px;font-weight:500}
+.ajouter:hover{background:var(--or);color:var(--or-fonce)}
+.details-lien{background:none;border:0;padding:0;color:var(--encre2);text-decoration:underline;text-underline-offset:3px;font-size:14px;align-self:flex-start}
+
+.galerie{columns:4 220px;column-gap:16px}
+.galerie figure{margin:0 0 16px;break-inside:avoid;border-radius:14px;overflow:hidden;box-shadow:0 0 0 1px var(--ligne)}
+.galerie img{width:100%}
+.note{color:var(--encre2);font-size:14px;margin-top:8px}
+
+footer{border-top:1px solid var(--ligne);padding-block:32px;color:var(--encre2);font-size:14px}
+footer .conteneur{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+.voile{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:30;opacity:0;pointer-events:none;transition:opacity .3s}
+.voile.ouvert{opacity:1;pointer-events:auto}
+.tiroir{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--surface);border-left:1px solid var(--ligne);z-index:31;transform:translateX(100%);transition:transform .35s cubic-bezier(.2,.8,.2,1);display:flex;flex-direction:column;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px))}
+.tiroir.ouvert{transform:none}
+.tiroir .haut{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.tiroir h2{font-size:28px}
+.fermer{background:none;border:1px solid var(--ligne);border-radius:999px;width:38px;height:38px;font-size:18px}
+.lignes{flex:1;overflow:auto;display:flex;flex-direction:column;gap:14px;min-height:0}
+.ligne{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center}
+.ligne img{width:64px;height:64px;object-fit:cover;border-radius:10px}
+.ligne .nom{font-weight:500}
+.ligne .pu{color:var(--encre2);font-size:14px;font-variant-numeric:tabular-nums}
+.qte{display:flex;align-items:center;gap:8px}
+.qte button{width:30px;height:30px;border-radius:999px;border:1px solid var(--ligne);background:none}
+.qte span{min-width:18px;text-align:center;font-variant-numeric:tabular-nums}
+.vide{color:var(--encre2);text-align:center;padding:40px 0}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--ligne);padding-top:16px;margin-top:16px}
+.total strong{font:400 28px var(--titre);color:var(--or);font-variant-numeric:tabular-nums}
+.petit{color:var(--encre2);font-size:13px;margin:6px 0 14px}
+form{display:flex;flex-direction:column;gap:10px}
+label{font-size:13px;color:var(--encre2)}
+input,textarea{width:100%;background:var(--fond);border:1px solid var(--ligne);border-radius:10px;padding:10px 12px;color:var(--encre);font:inherit}
+textarea{resize:vertical;min-height:64px}
+.cta[disabled]{opacity:.45;cursor:not-allowed}
+.merci{background:var(--fond);border:1px solid var(--or);border-radius:14px;padding:16px;margin-top:12px}
+.merci h3{font-size:22px;margin-bottom:6px}
+.merci p{margin:0;color:var(--encre2);font-size:14px}
+
+dialog{border:1px solid var(--ligne);border-radius:18px;background:var(--surface);color:var(--encre);padding:0;width:min(860px,calc(100% - 32px));max-height:calc(100% - 32px)}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+.fiche{display:grid;grid-template-columns:1fr 1fr}
+.fiche img{width:100%;height:100%;object-fit:cover;min-height:280px}
+.fiche .txt{padding:28px;display:flex;flex-direction:column;gap:12px}
+.fiche h3{font-size:34px}
+.fiche ul{margin:0;padding-left:18px;color:var(--encre2)}
+.fiche .fermer{align-self:flex-end}
+
+@media (max-width:760px){
+  nav a{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero .visuel{max-width:420px}
+  .fiche{grid-template-columns:1fr}
+  .fiche img{max-height:300px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header>
+  <div class="conteneur">
+    <a class="logo" href="#haut">Shop Bijoux</a>
+    <nav>
+      <a href="#collection">Collection</a>
+      <a href="#inspirations">Inspirations</a>
+      <button class="btn-panier" id="ouvrir-panier" type="button" aria-label="Ouvrir le panier">Panier <span class="compteur" id="compteur">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main id="haut">
+  <div class="conteneur hero">
+    <div>
+      <div class="etiquette">Idées cadeaux pour Noël</div>
+      <h1>Argent ciselé &amp; rubis</h1>
+      <p>Un bracelet aux motifs floraux gravés et une bague rubis entourée de diamants. Deux pièces à offrir, livrées dans leur écrin.</p>
+      <a class="cta" href="#collection">Voir la collection</a>
+    </div>
+    <div class="visuel" aria-hidden="true">
+      <img class="v1" src="bracelet.jpg" alt="">
+      <img class="v2" src="bague.jpg" alt="">
+    </div>
+  </div>
+
+  <div class="avantages">
+    <div class="conteneur">
+      <span><b>Livraison offerte</b> en France</span>
+      <span><b>Écrin cadeau</b> inclus</span>
+      <span><b>Idées cadeaux</b> pour Noël</span>
+    </div>
+  </div>
+
+  <section id="collection">
+    <div class="conteneur">
+      <div class="entete">
+        <div><div class="etiquette">La collection</div><h2>Nos pièces</h2></div>
+        <p>Deux pièces en argent, prêtes à offrir.</p>
+      </div>
+      <div class="produits" id="produits"></div>
+    </div>
+  </section>
+
+  <section id="inspirations">
+    <div class="conteneur">
+      <div class="entete">
+        <div><div class="etiquette">Inspirations</div><h2>Un bijou pour chaque style</h2></div>
+        <p>Des idées pour porter l'argent au quotidien.</p>
+      </div>
+      <div class="galerie">
+        <figure><img src="main-draps.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="perle.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="etoile.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="henne.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="couronne.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="mer.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="coeur.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="noirblanc.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="bague-orange.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="marche.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="kaftan.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="vert.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+        <figure><img src="ongles.jpg" alt="Bijou porté, photo d'ambiance" loading="lazy"></figure>
+      </div>
+      <p class="note">Photos d'ambiance Pexels : ces bijoux ne sont pas en vente.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="conteneur">
+    <span>© Shop Bijoux · shopbijoux.fr</span>
+    <span>Bijoux en argent · Livraison offerte · Écrin cadeau</span>
+  </div>
+</footer>
+
+<div class="voile" id="voile"></div>
+<aside class="tiroir" id="tiroir" aria-label="Panier" aria-hidden="true">
+  <div class="haut"><h2>Votre panier</h2><button class="fermer" id="fermer-panier" type="button" aria-label="Fermer le panier">×</button></div>
+  <div class="lignes" id="lignes"></div>
+  <div id="bas-panier">
+    <div class="total"><span>Total</span><strong id="total">0 €</strong></div>
+    <p class="petit">Livraison offerte · Écrin cadeau inclus</p>
+    <form id="commande">
+      <div><label for="c-nom">Nom et prénom</label><input id="c-nom" name="nom" required autocomplete="name"></div>
+      <div><label for="c-mail">E-mail</label><input id="c-mail" name="mail" type="email" required autocomplete="email"></div>
+      <div><label for="c-adresse">Adresse de livraison</label><textarea id="c-adresse" name="adresse" required autocomplete="street-address"></textarea></div>
+      <button class="cta" id="valider" type="submit">Valider la commande</button>
+    </form>
+    <div class="merci" id="merci" hidden>
+      <h3>Récapitulatif prêt</h3>
+      <p id="merci-txt"></p>
+    </div>
+  </div>
+</aside>
+
+<dialog id="fiche"><div class="fiche"><img id="f-img" alt=""><div class="txt">
+  <button class="fermer" id="f-fermer" type="button" aria-label="Fermer">×</button>
+  <div class="etiquette" id="f-eti"></div><h3 id="f-nom"></h3><p id="f-desc" style="margin:0;color:var(--encre2)"></p>
+  <ul id="f-points"></ul>
+  <div class="bas" style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:auto"><span class="prix" id="f-prix"></span><button class="cta" id="f-ajouter" type="button">Ajouter au panier</button></div>
+</div></div></dialog>
+
+<script>
+var PRODUITS=[
+ {id:"bracelet",nom:"Bracelet Empire romain",eti:"Empire romain · Argent ciselé",prix:89,img:"bracelet.jpg",
+  desc:"Une manchette aux motifs floraux gravés.",points:["Argent ciselé","Motifs floraux en relief","Manchette ouverte, s'ajuste au poignet"]},
+ {id:"bague",nom:"Bague Ruby",eti:"Rubis & diamants",prix:69,img:"bague.jpg",
+  desc:"Un rubis ovale entouré de diamants.",points:["Rubis taille ovale","Entourage de diamants baguette","Monture argent"]}
+];
+var $=function(i){return document.getElementById(i)};
+var eur=function(n){return n.toLocaleString("fr-FR")+" €"};
+var panier={};
+try{panier=JSON.parse(localStorage.getItem("panier-shopbijoux"))||{}}catch(e){}
+function sauver(){try{localStorage.setItem("panier-shopbijoux",JSON.stringify(panier))}catch(e){}}
+function produit(id){return PRODUITS.filter(function(p){return p.id===id})[0]}
+
+$("produits").innerHTML=PRODUITS.map(function(p){return '<article class="produit"><div class="photo"><img src="'+p.img+'" alt="'+p.nom+'"></div><div class="infos"><div class="etiquette">'+p.eti+'</div><h3>'+p.nom+'</h3><p>'+p.desc+'</p><button class="details-lien" type="button" data-fiche="'+p.id+'">Voir les détails</button><div class="bas"><span class="prix">'+eur(p.prix)+'</span><button class="ajouter" type="button" data-ajout="'+p.id+'">Ajouter au panier</button></div></div></article>'}).join("");
+
+function rendre(){
+  var ids=Object.keys(panier).filter(function(k){return panier[k]>0&&produit(k)});
+  var n=0,t=0;ids.forEach(function(k){n+=panier[k];t+=panier[k]*produit(k).prix});
+  $("compteur").textContent=n;$("total").textContent=eur(t);
+  $("lignes").innerHTML=ids.length?ids.map(function(k){var p=produit(k);return '<div class="ligne"><img src="'+p.img+'" alt=""><div><div class="nom">'+p.nom+'</div><div class="pu">'+eur(p.prix)+'</div></div><div class="qte"><button type="button" data-moins="'+k+'" aria-label="Retirer un">−</button><span>'+panier[k]+'</span><button type="button" data-plus="'+k+'" aria-label="Ajouter un">+</button></div></div>'}).join(""):'<div class="vide">Votre panier est vide.<br>Ajoutez un bijou de la collection.</div>';
+  $("valider").disabled=!ids.length;
+}
+function ajouter(id){panier[id]=(panier[id]||0)+1;sauver();rendre();ouvrir()}
+function ouvrir(){$("tiroir").classList.add("ouvert");$("voile").classList.add("ouvert");$("tiroir").setAttribute("aria-hidden","false")}
+function fermer(){$("tiroir").classList.remove("ouvert");$("voile").classList.remove("ouvert");$("tiroir").setAttribute("aria-hidden","true")}
+document.addEventListener("click",function(e){
+  var b=e.target.closest("[data-ajout],[data-plus],[data-moins],[data-fiche]");if(!b)return;
+  if(b.dataset.ajout)ajouter(b.dataset.ajout);
+  if(b.dataset.plus){panier[b.dataset.plus]++;sauver();rendre()}
+  if(b.dataset.moins){panier[b.dataset.moins]--;if(panier[b.dataset.moins]<=0)delete panier[b.dataset.moins];sauver();rendre()}
+  if(b.dataset.fiche){var p=produit(b.dataset.fiche);$("f-img").src=p.img;$("f-img").alt=p.nom;$("f-eti").textContent=p.eti;$("f-nom").textContent=p.nom;$("f-desc").textContent=p.desc;$("f-prix").textContent=eur(p.prix);$("f-points").innerHTML=p.points.map(function(x){return "<li>"+x+"</li>"}).join("");$("f-ajouter").onclick=function(){$("fiche").close();ajouter(p.id)};$("fiche").showModal()}
+});
+$("f-fermer").onclick=function(){$("fiche").close()};
+$("ouvrir-panier").onclick=ouvrir;$("fermer-panier").onclick=fermer;$("voile").onclick=fermer;
+document.addEventListener("keydown",function(e){if(e.key==="Escape")fermer()});
+$("commande").addEventListener("submit",function(e){
+  e.preventDefault();
+  var nom=$("c-nom").value.trim();
+  $("merci-txt").textContent="Merci "+nom+" ! Total : "+$("total").textContent+". Boutique de démonstration : cette commande n'est pas encore transmise, le paiement en ligne reste à brancher.";
+  $("merci").hidden=false;panier={};sauver();rendre();this.reset();
+});
+rendre();
+</script>
