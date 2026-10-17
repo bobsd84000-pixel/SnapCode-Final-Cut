@@ -119,9 +119,9 @@ iframe{border:0;background:var(--toile);height:620px;max-width:100%;border-radiu
 <button type="button" data-format="playcanvas" aria-pressed="false">PlayCanvas</button>
 </div>
 
-<label class="cle" for="cle">Clé API Anthropic</label>
-<input type="password" id="cle" autocomplete="off" placeholder="sk-ant-…">
-<p class="aide">La clé reste local. Laisse vide si tu tournes dans Claude.</p>
+<label class="cle" for="cle">Clé API Groq (gratuite)</label>
+<input type="password" id="cle" autocomplete="off" placeholder="gsk_…">
+<p class="aide">Clé gratuite sur console.groq.com/keys. Une clé Anthropic (sk-ant-…) marche aussi. La clé reste locale.</p>
 
 <button type="button" class="primaire" id="generer" disabled>Générer le code 3D</button>
 <div class="etat" id="etat" role="status" aria-live="polite" hidden></div>
@@ -576,6 +576,7 @@ var u=String(e.data.url||"");if(!/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.te
 if(typeof ajouterBib==="function")ajouterBib({url:u,base64:u.split(",")[1]},{capture:true},true);
 });
 var MODELE="claude-sonnet-4-6";
+var MODELE_GROQ="meta-llama/llama-4-scout-17b-16e-instruct";
 var $=function(id){return document.getElementById(id)};
 var etat={image:null,format:"threejs",code:"",occupe:false};
 
@@ -878,8 +879,22 @@ playcanvas:"Convertis cette capture d'écran 3D en page PlayCanvas complète. Re
 
 function nettoyer(t){return t.replace(/^\s*```[a-z]*\s*/i,"").replace(/\s*```\s*$/,"").trim()}
 
+function appelerGroq(cle,format,messages){
+var msgs=[{role:"system",content:SYSTEME[format]}].concat(messages.map(function(m){return {role:m.role,content:typeof m.content==="string"?m.content:m.content.map(function(b){return b.type==="image"?{type:"image_url",image_url:{url:"data:"+b.source.media_type+";base64,"+b.source.data}}:{type:"text",text:b.text}})}}));
+return fetch("https://api.groq.com/openai/v1/chat/completions",{
+method:"POST",headers:{"content-type":"application/json","authorization":"Bearer "+cle},
+body:JSON.stringify({model:MODELE_GROQ,max_tokens:8000,messages:msgs})
+}).then(function(r){return r.json().then(function(d){return {ok:r.ok,data:d}})}).then(function(r){
+if(!r.ok)throw new Error(r.data.error?.message||"Erreur génération");
+var texte=r.data.choices?.[0]?.message?.content||"";
+if(!texte.trim())throw new Error("Réponse vide");
+return nettoyer(texte);
+});
+}
+
 function appeler(format,messages){
 var cle=$("cle").value.trim();
+if(/^gsk_/.test(cle))return appelerGroq(cle,format,messages);
 var entetes={"content-type":"application/json"};
 if(cle){entetes["x-api-key"]=cle;entetes["anthropic-version"]="2023-06-01";entetes["anthropic-dangerous-direct-browser-access"]="true"}
 return fetch("https://api.anthropic.com/v1/messages",{
@@ -913,7 +928,7 @@ $("cadre").srcdoc=code;
 $("etiquette").textContent="Code "+NOMS[format]+" généré depuis cette photo.";
 $("vide").hidden=true;$("resultat").hidden=false;statut("");
 $("copier").disabled=false;$("telecharger").disabled=false;
-}).catch(function(e){var m=e.message||"";statut("");erreur(/api.?key|authentic|fetch|network|load failed/i.test(m)?"Colle ta clé API Anthropic dans le champ ci-dessus pour convertir une photo perso.":m);$("copier").disabled=true;$("telecharger").disabled=true}).finally(function(){etat.occupe=false;btn.disabled=!etat.image});
+}).catch(function(e){var m=e.message||"";statut("");erreur(/api.?key|authentic|fetch|network|load failed/i.test(m)?"Colle ta clé API Groq (gratuite, console.groq.com/keys) dans le champ ci-dessus pour convertir une photo perso.":m);$("copier").disabled=true;$("telecharger").disabled=true}).finally(function(){etat.occupe=false;btn.disabled=!etat.image});
 });
 
 $("copier").addEventListener("click",function(){
